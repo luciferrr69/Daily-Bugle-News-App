@@ -113,6 +113,14 @@ export class News extends Component {
 
         }
     }
+    async componentDidMount() {
+        console.log("cdm")
+        let url = "https://newsapi.org/v2/everything?q=apple&from=2021-11-15&to=2021-11-15&sortBy=popularity&apiKey=029b34e3bc2d40e98b6ca81f71f3dbbf";
+        let data = await fetch(url);
+        let parsedData = await data.json()
+        console.log(parsedData);
+        this.setState({ articles: parsedData.articles })
+    }
     render() {
         return (
             <div className="container my-3">
@@ -121,7 +129,7 @@ export class News extends Component {
                 <div className="row">
                     {this.state.articles.map((element) => {
                         return <div className="col-md-4" key={element.url}>
-                            <NewsItem title={element.title} description={element.description} imageUrl={element.urlToImage} newsUrl={element.url} />
+                            <NewsItem title={element.title} description={element.description.slice(0, 100)} imageUrl={element.urlToImage} newsUrl={element.url} />
                         </div>
                     })}
 
