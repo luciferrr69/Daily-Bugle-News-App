@@ -1,139 +1,95 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
+import spinner from './spinner';
+import PropTypes from 'prop-types'
+
 
 export class News extends Component {
-    articles = [
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Biden signs 'once-in-a-generation' $1tn infrastructure bill into law",
-            "description": "The 'once-in-a-generation' law nearly failed to pass Congress this month amid Democratic infighting.",
-            "url": "http://www.bbc.co.uk/news/world-us-canada-59298981",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/1537B/production/_121570968_tv071998434.jpg",
-            "publishedAt": "2021-11-15T21:52:21.7508748Z",
-            "content": "US President Joe Biden has signed into law a $1.2tn (£894bn) infrastructure spending bill, marking a legislative achievement for his administration.\r\n\"Today, we are finally getting this done,\" the De… [+2020 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "US anger at Russian anti-satellite missile test debris",
-            "description": "The state department says Russia \"recklessly\" destroyed a satellite, endangering astronauts in space.",
-            "url": "http://www.bbc.co.uk/news/science-environment-59299101",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/179C3/production/_121570769_96e71b1f-4478-493a-a881-8433f464153a.jpg",
-            "publishedAt": "2021-11-15T21:22:18.9615655Z",
-            "content": "Image caption, Astronauts on the ISS are increasingly having to take precautionary measures when fragments from old satellites and rockets come close\r\nThe US has condemned Russia for conducting a \"da… [+4619 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Apple digital ID scheme comes with conditions and costs",
-            "description": "Apple's digital driver's licence scheme has strict stipulations and may costs taxpayers.",
-            "url": "http://www.bbc.co.uk/news/technology-59292649",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/7126/production/_120366982_apple_drivers.png",
-            "publishedAt": "2021-11-15T19:37:26.3971745Z",
-            "content": "Apple's much promoted digital driver's licence feature comes at a cost to the taxpayer, according to reports.\r\nAnnounced in September, it will allow residents in eight US states to store state IDs an… [+2724 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Kyle Rittenhouse: Weapons charge against accused US teen dropped",
-            "description": "The judge dismissed the charge ahead of closing arguments by prosecutors and defence on Monday.",
-            "url": "http://www.bbc.co.uk/news/world-us-canada-59295723",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/14344/production/_121565728_gettyimages-1236525652.jpg",
-            "publishedAt": "2021-11-15T18:37:22.1904587Z",
-            "content": "Image source, Getty Images\r\nTensions are high in a Wisconsin city where closing arguments have begun in the trial of a US teen who shot three people during civil unrest last year.\r\nKyle Rittenhouse f… [+2406 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Jair Bolsonaro and guns: A US culture war raging in Brazil",
-            "description": "Gun culture was part of Bolsonaro's winning presidential campaign. Three years on, what's the impact?",
-            "url": "http://www.bbc.co.uk/news/world-latin-america-59246083",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/DAAE/production/_121528955_gettyimages-1233893133.jpg",
-            "publishedAt": "2021-11-15T18:07:23.7147544Z",
-            "content": "By Katy WatsonSao Paulo, Brazil\r\nImage source, Getty Images\r\nGun culture was a key part of Jair Bolsonaro's winning campaign to become Brazil's president. Three years later, what impact has he had on… [+7820 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Danny Fenster: US journalist freed from Myanmar jail",
-            "description": "Danny Fenster has been \"pardoned\" just days after getting an 11-year sentence, and is flying home.",
-            "url": "http://www.bbc.co.uk/news/world-asia-59290412",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/4CA5/production/_121512691_mediaitem121512687.jpg",
-            "publishedAt": "2021-11-15T16:37:26.7983915Z",
-            "content": "Image caption, Danny Fenster was detained at Yangon international airport in May\r\nUS journalist Danny Fenster has been released from prison in Myanmar after he was sentenced to 11 years in jail by a … [+4068 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Steve Bannon surrenders to face contempt charges",
-            "description": "Mr Bannon, a former White House advisor to Donald Trump, has surrendered to FBI officials.",
-            "url": "http://www.bbc.co.uk/news/59253089",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/17A58/production/_121565869_gettyimages-1353424911.jpg",
-            "publishedAt": "2021-11-15T15:37:20.9554175Z",
-            "content": "Image source, Getty Images\r\nTrump ally Steve Bannon has surrendered to authorities to face contempt of Congress charges after refusing to give evidence about the Capitol riot.\r\nMr Bannon defied a sum… [+2267 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Japan's former princess Mako arrives in New York after giving up title",
-            "description": "Mako was forced to give up her titles when she married her \"commoner\" husband last month.",
-            "url": "http://www.bbc.co.uk/news/world-asia-59280707",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/CDF5/production/_121552725_mediaitem121555725.jpg",
-            "publishedAt": "2021-11-15T12:22:22.7092866Z",
-            "content": "Image caption, Footage broadcast in Japan showed the former princess arriving in New York\r\nJapan's former princess Mako has arrived in the US with her new \"commoner\" husband, Kei Komuro, after leavin… [+2070 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "Joe Biden and Xi Jinping: What they want from talks",
-            "description": "The video call on Monday will address several thorny issues, including Taiwan, cybersecurity and trade.",
-            "url": "http://www.bbc.co.uk/news/world-us-canada-59258375",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/8451/production/_121537833_gettyimages-453444607.jpg",
-            "publishedAt": "2021-11-15T09:07:21.0166652Z",
-            "content": "Image source, Getty Images\r\nUS President Joe Biden and Chinese President Xi Jinping will hold a virtual summit on Monday as tensions between the countries deepen.\r\nThe competing superpowers surprised… [+4142 chars]"
-        },
-        {
-            "source": { "id": "bbc-news", "name": "BBC News" },
-            "author": "BBC News",
-            "title": "'I had concerns about marriage': Malala Yousafzai",
-            "description": "The Nobel laureate says she previously questioned marriage and the \"imbalance of power\".",
-            "url": "http://www.bbc.co.uk/news/world-asia-59286773",
-            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/217F/production/_121557580_p0b48f8w.jpg",
-            "publishedAt": "2021-11-15T04:37:22.4375409Z",
-            "content": "Nobel Peace Prize winner Malala Yousafzai, who married her partner Asser Malik last week, has addressed the \"concerns\" about marriage she had previously voiced to British Vogue.\r\nAppearing on the BBC… [+522 chars]"
-        }
-    ]
+    static defaultProps = {
+        country: "in",
+        pageSize: 8,
+        category: "general",
+    }
+
+    static propTypes = {
+        country: PropTypes.string,
+        pageSize: PropTypes.number,
+        category: PropTypes.string,
+    }
+
     constructor() {
         super();
         console.log("Hello I am constructor")
         this.state = {
-            articles: this.articles,
-            loading: false
+            articles: [],
+            loading: false,
+            page: 1
 
         }
     }
     async componentDidMount() {
         console.log("cdm")
-        let url = "https://newsapi.org/v2/everything?q=apple&from=2021-11-15&to=2021-11-15&sortBy=popularity&apiKey=029b34e3bc2d40e98b6ca81f71f3dbbf";
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=029b34e3bc2d40e98b6ca81f71f3dbbf&page=1&pageSize=${this.props.pageSize}`;
+        this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json()
         console.log(parsedData);
-        this.setState({ articles: parsedData.articles })
+        this.setState({ articles: parsedData.articles, totalResults: parsedData.totalResults, laoding: false })
+    }
+    handlePrevClick = async () => {
+        console.log("Previous");
+
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=029b34e3bc2d40e98b6ca81f71f3dbbf&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+        /*
+       https://newsapi.org/v2/top-headlines?country=us&category=business&category=${this.props.category}&apiKey==029b34e3bc2d40e98b6ca81f71f3dbbf
+        */
+        this.setState({ loading: true });
+        let data = await fetch(url);
+        let parsedData = await data.json()
+        console.log(parsedData);
+        this.setState({
+            page: this.state.page - 1,
+            articles: parsedData.articles,
+            loading: false
+        })
+    }
+
+    handleNextClick = async () => {
+        console.log("Next");
+        if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize))) {
+
+
+
+            let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=029b34e3bc2d40e98b6ca81f71f3dbbf&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+            this.setState({ loading: true });
+            let data = await fetch(url);
+            let parsedData = await data.json()
+
+            this.setState({
+                page: this.state.page + 1,
+                articles: parsedData.articles,
+                loading: false
+            })
+        }
     }
     render() {
         return (
             <div className="container my-3">
-                <h2>Daily Bugle- Top Headlines </h2>
+                <h1 className="text-center">Daily Bugle- Top Headlines</h1>
+                {this.state.loading && <spinner />}
 
                 <div className="row">
-                    {this.state.articles.map((element) => {
+                    {!this.state.loading && this.state.articles.map((element) => {
                         return <div className="col-md-4" key={element.url}>
-                            <NewsItem title={element.title} description={element.description.slice(0, 100)} imageUrl={element.urlToImage} newsUrl={element.url} />
+                            <NewsItem title={element.title} description={element.description} imageUrl={element.urlToImage} newsUrl={element.url} />
                         </div>
                     })}
 
 
+                </div>
+                <div className="container d-flex justify-content-between">
+                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick} > &laquo; Previous</button>
+                    <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next &raquo;</button>
                 </div>
 
 
