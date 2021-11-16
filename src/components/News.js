@@ -40,9 +40,7 @@ export class News extends Component {
         console.log("Previous");
 
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=029b34e3bc2d40e98b6ca81f71f3dbbf&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-        /*
-       https://newsapi.org/v2/top-headlines?country=us&category=business&category=${this.props.category}&apiKey==029b34e3bc2d40e98b6ca81f71f3dbbf
-        */
+
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json()
@@ -76,7 +74,7 @@ export class News extends Component {
         return (
             <div className="container my-3">
                 <h1 className="text-center">Daily Bugle- Top Headlines</h1>
-                {this.state.loading && <spinner />}
+                {this.state.loading && <Spinner />}
 
                 <div className="row">
                     {!this.state.loading && this.state.articles.map((element) => {
@@ -89,7 +87,7 @@ export class News extends Component {
                 </div>
                 <div className="container d-flex justify-content-between">
                     <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick} > &laquo; Previous</button>
-                    <button type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next &raquo;</button>
+                    <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next &raquo;</button>
                 </div>
 
 
